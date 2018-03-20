@@ -1,0 +1,1 @@
+My version of lottery-react app from Udemy Ethereum course
