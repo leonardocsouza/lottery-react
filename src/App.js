@@ -8,7 +8,8 @@ class App extends Component {
     manager: '',
     players: [],
     balance: '',
-    value: ''
+    value: '',
+    message: ''
   };
 
   async componentDidMount() {
@@ -24,6 +25,8 @@ class App extends Component {
   onSubmit = async (event) => {
     event.preventDefault(); //prevent form from submitting itself/reloading page. duh
 
+    this.setState({ message: 'Waiting on transaction success...' });
+
     // for sending ether we DO need to get list of accounts and pass it to send method
     const accounts = await web3.eth.getAccounts();
 
@@ -31,6 +34,8 @@ class App extends Component {
       from: accounts[0],
       value: web3.utils.toWei(this.state.value, 'ether')
     });
+
+    this.setState({ message: 'You have been entered!' });
   }
 
   render() {
@@ -56,6 +61,10 @@ class App extends Component {
           </div>
           <button>Enter</button>
         </form>
+
+        <hr />
+
+        <h1>{this.state.message}</h1>
       </div>
     );
   }
